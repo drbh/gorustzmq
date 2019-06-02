@@ -1,0 +1,8 @@
+[package]
+name = "gorustzmq"
+version = "0.1.0"
+authors = ["David Holtz <david.richard.holtz@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+zmq = "0.9"
