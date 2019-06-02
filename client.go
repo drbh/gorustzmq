@@ -13,17 +13,29 @@ import (
 
 func main() {
 	//  Prepare our subscriber
-	subscriber, _ := zmq.NewSocket(zmq.SUB)
+	subscriber, err := zmq.NewSocket(zmq.SUB)
+
+	if err != nil {
+		fmt.Println("CON Error:", err)
+	}
+
 	defer subscriber.Close()
 
-	time.Sleep(1000 * time.Millisecond)
+	// wait a second - incase the isse is connecting
+	// to qickly after opening the socket (suggested on StackOverflow)
+	time.Sleep(500 * time.Millisecond)
 
 	subscriber.Connect("tcp://*:5555")
 	subscriber.SetSubscribe("")
 
 	for {
 		// Read envelope with address
-		address, _ := subscriber.Recv(0)
+		address, err := subscriber.Recv(0)
+
+		if err != nil {
+			fmt.Println("MSG Error:", err)
+
+		}
 		fmt.Println(address)
 	}
 }
