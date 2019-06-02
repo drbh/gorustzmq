@@ -25,7 +25,8 @@ func main() {
 	// to qickly after opening the socket (suggested on StackOverflow)
 	time.Sleep(500 * time.Millisecond)
 
-	subscriber.Connect("tcp://*:5555")
+	// subscriber.Connect("tcp://*:5555")
+	subscriber.Connect("tcp://localhost:5555")
 	subscriber.SetSubscribe("")
 
 	for {
